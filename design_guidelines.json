@@ -1,0 +1,175 @@
+{
+  "project_title": "Atanu Bhowmick - High-Impact Multidisciplinary Portfolio",
+  "archetype": "THE PERFORMANCE PRO x SWISS BRUTALIST HYBRID",
+  "theme_mode": "dark",
+  "fonts": {
+    "headline_family": "@fontsource-variable/outfit",
+    "headline_font_name": "Outfit, sans-serif",
+    "body_family": "@fontsource-variable/plus-jakarta-sans",
+    "body_font_name": "Plus Jakarta Sans, sans-serif",
+    "accent_mono_family": "@fontsource-variable/jetbrains-mono",
+    "accent_mono_font_name": "JetBrains Mono, monospace",
+    "typography_rules": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight",
+      "h3": "text-xl sm:text-2xl font-semibold tracking-tight",
+      "overlines": "text-xs uppercase tracking-[0.2em] font-mono text-cyan-400 font-medium",
+      "body": "text-base sm:text-lg text-slate-300 leading-relaxed",
+      "subtitle": "text-lg sm:text-xl text-slate-400 font-normal leading-relaxed"
+    }
+  },
+  "colors": {
+    "background": "#090D16",
+    "background_secondary": "#0F172A",
+    "card_bg": "#121E36",
+    "border_color": "rgba(255, 255, 255, 0.08)",
+    "border_hover": "rgba(56, 189, 248, 0.4)",
+    "primary_accent": "#38BDF8",
+    "primary_accent_hover": "#0EA5E9",
+    "secondary_accent": "#818CF8",
+    "highlight_amber": "#F59E0B",
+    "text_primary": "#F8FAFC",
+    "text_secondary": "#94A3B8",
+    "text_muted": "#64748B",
+    "gradient_hero": "bg-gradient-to-r from-sky-400 via-indigo-300 to-amber-300 bg-clip-text text-transparent"
+  },
+  "layout_and_spacing": {
+    "container_max_width": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "section_padding": "py-20 sm:py-28 px-4 sm:px-6 lg:px-8",
+    "grid_bento": "grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-6 lg:gap-8",
+    "card_padding": "p-6 sm:p-8 lg:p-10",
+    "border_radius": "rounded-2xl"
+  },
+  "visual_enhancers": {
+    "glassmorphism": "backdrop-blur-xl bg-slate-900/80 border border-white/10 shadow-2xl",
+    "glow_effects": "shadow-[0_0_30px_rgba(56,189,248,0.15)]",
+    "card_surface": "bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-8 hover:border-sky-500/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(56,189,248,0.12)]",
+    "noise_texture_overlay": "pointer-events-none absolute inset-0 opacity-[0.03] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"
+  },
+  "image_urls": [
+    {
+      "category": "hero_profile",
+      "url": "https://images.unsplash.com/photo-1510511233900-1982d92bd835?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBldmVudCUyMG1hbmFnZW1lbnQlMjBzdGFnZSUyMHNwZWFrZXIlMjB0ZWNoJTIwb3JnYW5pemVyfGVufDB8fHx8MTc4OTMwNDQzMHww&ixlib=rb-4.1.0&q=85",
+      "description": "Atanu Bhowmick - Main Event Stage & Production Control setup",
+      "placement": "Hero Section Avatar/Badge & About Me Grid"
+    },
+    {
+      "category": "developer_tech",
+      "url": "https://images.unsplash.com/photo-1760999896198-b7e780e42500?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBkZXZlbG9wZXIlMjB3b3Jrc3BhY2UlMjBsYXB0b3AlMjBjb2RlJTIwbmVvbiUyMGFtYmllbnR8ZW58MHx8fHwxNzg5MzA0NDM2fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Modern Software Engineering & Code Terminal Workspace",
+      "placement": "Software Engineering & Tech Pillar Showcase Card"
+    },
+    {
+      "category": "event_operations",
+      "url": "https://images.unsplash.com/photo-1518890569493-668df9a00266?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBldmVudCUyMG1hbmFnZW1lbnQlMjBzdGFnZSUyMHNwZWFrZXIlMjB0ZWNoJTIwb3JnYW5pemVyfGVufDB8fHx8MTc4OTMwNDQzMHww&ixlib=rb-4.1.0&q=85",
+      "description": "Large Stage Event Operations & Production Control Desk",
+      "placement": "Logistics, Security & Event Leadership Card"
+    }
+  ],
+  "sections_blueprint": [
+    {
+      "id": "hero",
+      "title": "Hero Section",
+      "components": [
+        "Navigation Header with Blur Glass effect, Brand Logo ('AB'), links to #about, #pillars, #experience, #qualifications, #resumes, #contact, and 'Let's Connect' primary CTA button",
+        "Hero Title: 'Hi, I'm Atanu Bhowmick'",
+        "Sub-headline badge: 'B.Tech Electrical Engineer | Tech Enthusiast | Marketing & Events | Operations'",
+        "Pillars summary badge array: ['Web Development', 'Logistics & Security Head', 'Sales & BD', 'Quality Control']",
+        "Action Buttons: Primary 'Connect via Mail' (mailto:bhowmickatanu083@gmail.com), Secondary 'LinkedIn Profile', 'View Resumes'",
+        "Profile Image Badge with glowing active ring and tech stat overlay ('100% On-Ground Execution Rate')"
+      ]
+    },
+    {
+      "id": "about",
+      "title": "About Me & Multidisciplinary Philosophy",
+      "components": [
+        "Overline: 'WHO I AM'",
+        "Interactive Story Card: Journey from Electrical Engineering B.Tech graduate to Logistics & Security Head and Web Developer",
+        "Key Pillars Grid (4 Bento Cards): 1. Technology & Code, 2. People & Communication, 3. Events & Operations, 4. Problem Solving Under Pressure",
+        "Interactive Tab/Toggle to switch between 'Engineering Mindset' vs 'Event Orchestration' view"
+      ]
+    },
+    {
+      "id": "experience",
+      "title": "Experience & On-Ground Leadership Timeline",
+      "components": [
+        "Timeline Card 1: Logistics & Security Head - College Mega Event (Coordinated artists, vendors, security teams, real-time crisis resolution)",
+        "Timeline Card 2: Business Development & Sales Professional (Client handling, pitch presentations, revenue growth)",
+        "Timeline Card 3: Quality Control & Operations Specialist (Process monitoring, standards compliance, optimization)",
+        "Timeline Card 4: Full Stack & Web Development Practitioner (Building modern responsive digital experiences & interactive web apps)"
+      ]
+    },
+    {
+      "id": "qualifications",
+      "title": "Qualifications & Education",
+      "components": [
+        "Card: B.Tech in Electrical Engineering",
+        "Skill Clusters: Languages & Tech (JavaScript, React, HTML/CSS, Python, Web Dev Tools), Operational Skills (Vendor Management, Crisis Management, Security Protocols, Crowd Control), Soft Skills (Client Handling, Team Leadership, Negotiation)",
+        "Qualifications Modal/Drawer Trigger for detailed breakdown"
+      ]
+    },
+    {
+      "id": "resumes",
+      "title": "Resumes & Specialized Tracks",
+      "components": [
+        "Dual Resume Cards with interactive PDF preview trigger/download choice:",
+        "Resume 1: Software Developer & IT Track (Resume1.pdf / Interactive preview)",
+        "Resume 2: Event Management, Operations & Marketing Track (Resume2.pdf / Interactive preview)"
+      ]
+    },
+    {
+      "id": "contact",
+      "title": "Let's Connect & Action Center",
+      "components": [
+        "Direct Contact Card: Email (bhowmickatanu083@gmail.com) with 1-click Copy To Clipboard + Mailto action",
+        "Mobile Phone Link (+91 9679644406) with click-to-call",
+        "LinkedIn Direct Link (https://www.linkedin.com/in/atanu-bhowmick-a077aa283)",
+        "Interactive Quick Inquiry Form (front-end state with instant feedback toast via Sonner)"
+      ]
+    }
+  ],
+  "interactive_features": [
+    "Interactive Dual-Resume Viewer Modal with tabs for 'Software Dev Resume' and 'Event Management Resume'",
+    "Qualifications Drawer/Modal detailing coursework, certifications, and technical projects",
+    "Filterable Skill Matrix (Filter by: All, Technology, Events & Ops, Marketing & BD)",
+    "Interactive Contact Copy-to-clipboard for Email & Phone with Toast notification (Sonner)",
+    "Smooth Scrolling with active navigation item highlight",
+    "Back-to-top floating button"
+  ],
+  "accessibility_and_testing": {
+    "required_data_testids": [
+      "nav-brand-logo",
+      "nav-link-about",
+      "nav-link-experience",
+      "nav-link-qualifications",
+      "nav-link-resumes",
+      "nav-link-contact",
+      "hero-title",
+      "hero-role-badge",
+      "hero-email-button",
+      "hero-linkedin-link",
+      "hero-connect-cta",
+      "about-section-container",
+      "skills-filter-technology",
+      "skills-filter-events",
+      "timeline-item-logistics-head",
+      "qualifications-button",
+      "qualifications-modal-trigger",
+      "resume-event-management-button",
+      "resume-software-developer-button",
+      "contact-email-copy-button",
+      "contact-phone-link",
+      "contact-linkedin-button",
+      "contact-inquiry-form-submit"
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Implement the React single-page portfolio application in standard JavaScript React (.js files).",
+    "Use standard Tailwind CSS classes matching the dark luxury performance palette defined above.",
+    "Ensure all interactive elements have data-testid attributes exact to the specification.",
+    "Do NOT use transparent headers. Use glassmorphism 'backdrop-blur-xl bg-slate-900/80' with border.",
+    "Include both specialized Resume download/view choices for Software Development and Event Management.",
+    "Use Sonner for toast notifications when email/phone is copied or contact form is submitted.",
+    "All copy must retain Atanu Bhowmick's real details: B.Tech Electrical Engineering, bhowmickatanu083@gmail.com, +91 9679644406, LinkedIn URL."
+  ]
+}
