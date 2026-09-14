@@ -37,6 +37,9 @@ if (!hotReloadDisabled) {
 export default defineConfig(async () => {
   const emergentOverlay = await loadEmergentOverlay();
   return {
+    // Atanu010/atanubhowmick.github.io is a GitHub user site, so production assets
+    // are served from the domain root rather than from a repository subdirectory.
+    base: "/",
     plugins: [
       react(),
       tailwindcss(),
@@ -87,6 +90,10 @@ export default defineConfig(async () => {
         "sonner",
         "tailwind-merge",
       ],
+    },
+    build: {
+      outDir: "dist",
+      emptyOutDir: true,
     },
     server: {
       host: true,

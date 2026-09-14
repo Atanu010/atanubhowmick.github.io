@@ -21,3 +21,10 @@ Single-page professional portfolio presenting Atanu's multidisciplinary backgrou
 ## Auth and integrations
 
 No authentication, accounts, database-backed portfolio content, or third-party integrations. Contact actions use mailto, tel and external LinkedIn links only.
+
+## Deployment
+
+- GitHub repository target: `Atanu010/atanubhowmick.github.io`, branch `main`.
+- `.github/workflows/deploy-pages.yml` builds the Vite app from `frontend/` and deploys `frontend/dist` to GitHub Pages.
+- Vite uses the root base path `/` because this is a GitHub user site repository.
+- GitHub Pages hosts only the static frontend. The FastAPI backend remains in the repository for separate hosting and is not deployed by the Pages workflow.

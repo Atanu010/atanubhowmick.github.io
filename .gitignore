@@ -86,9 +86,13 @@ android-sdk/
 
 # overlay black-box crash/user-report dumps — session data, never history
 **/.emergent/recordings/
-.env
-.env.*
-*.env
+# Keep local runtime configuration out of Git while allowing safe *.env.example files.
+/backend/.env
+/backend/.env.*
+!/backend/.env.example
+/frontend/.env
+/frontend/.env.*
+!/frontend/.env.example
 credentials.json
 *.key
 .credentials
