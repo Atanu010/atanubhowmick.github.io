@@ -39,7 +39,7 @@ export default defineConfig(async () => {
   return {
     // Atanu010/atanubhowmick.github.io is a GitHub user site, so production assets
     // are served from the domain root rather than from a repository subdirectory.
-    base: "/",
+    base: "/atanubhowmick.github.io/",
     plugins: [
       react(),
       tailwindcss(),
