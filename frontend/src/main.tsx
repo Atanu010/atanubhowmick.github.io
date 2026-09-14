@@ -9,7 +9,7 @@ import { queryClient } from './lib/queryClient'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename="/atanubhowmick.github.io">
         <App />
       </BrowserRouter>
     </QueryClientProvider>
