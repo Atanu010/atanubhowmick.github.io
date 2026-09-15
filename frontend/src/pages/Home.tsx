@@ -29,7 +29,7 @@ import AboutSection from "@/components/AboutSection";
 import ResumeSection from "@/components/ResumeSection";
 
 const email = "bhowmickatanu83@gmail.com";
-const cvUrl = "https://customer-assets-7cd3h4nn.emergentagent.net/job_tech-events-ops/artifacts/sjd6bs5w_Atanu%27s%20CV.pdf";
+const cvUrl = "https://customer-assets-7cd3h4nn.emergentagent.net/job_tech-events-ops/artifacts/96jntc95_Atanu%2Cs%20CV.pdf";
 const phone = "+91 9679644406";
 const linkedIn = "https://www.linkedin.com/in/atanu-bhowmick-a077aa283";
 const eventImage =

@@ -21,7 +21,8 @@ Single-page professional portfolio presenting Atanu as an Electrical Engineering
 - Primary directions: full-stack/software/Python development, data analytics, AI/ML and AI-powered applications, industrial technology / IoT. No claims of expertise or professional data analyst employment.
 - EventPulse and Industrial Motor Intelligence are user-supplied project names used for the CV's event management/smart ticketing and industrial predictive-maintenance directions, respectively. Both are explicitly in progress; no live project links, achieved metrics, or completed capabilities claimed.
 - The CV also lists planned AI Energy & Industrial Intelligence Dashboard and AI Business & Data Analytics Agent; planned does not mean built.
-- Source CV: https://customer-assets-7cd3h4nn.emergentagent.net/job_tech-events-ops/artifacts/sjd6bs5w_Atanu%27s%20CV.pdf . Linked directly, not modified or regenerated.
+- Source CV for the existing portfolio text: https://customer-assets-7cd3h4nn.emergentagent.net/job_tech-events-ops/artifacts/sjd6bs5w_Atanu%27s%20CV.pdf . Retained as the factual source for existing copy, no longer the linked download.
+- Current linked CV: https://customer-assets-7cd3h4nn.emergentagent.net/job_tech-events-ops/artifacts/96jntc95_Atanu%2Cs%20CV.pdf . User explicitly requested PDF-only replacement; all portfolio text, contact information and design remain unchanged. Both About Me and CV section links share this URL. PDF is linked directly, not modified or regenerated.
 - Core technical stack and interests reflect the user's detailed brief and CV. Current learning is identified honestly. Additional event, business development/sales and quality control experience comes from the original user brief, not invented employers/dates.
 
 ## Auth and integrations
