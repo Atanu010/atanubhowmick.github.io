@@ -2,23 +2,19 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import {
   ArrowUpRight,
+  Brain,
   BriefcaseBusiness,
   Check,
-  ChevronRight,
   Clipboard,
   Code2,
-  Download,
-  ExternalLink,
-  Lightbulb,
+  Database,
+  GitBranch,
   Linkedin,
   Mail,
   Menu,
   Phone,
-  Quote,
-  ShieldCheck,
+  Server,
   Sparkles,
-  Terminal,
-  Users,
   X,
   Zap,
 } from "lucide-react";
@@ -31,95 +27,123 @@ import { Toaster } from "@/components/ui/sonner";
 const email = "bhowmickatanu083@gmail.com";
 const phone = "+91 9679644406";
 const linkedIn = "https://www.linkedin.com/in/atanu-bhowmick-a077aa283";
-const eventImage =
-  "https://images.unsplash.com/photo-1655392032420-4a8237b2ff94?auto=format&fit=crop&w=1200&q=85";
+const github = "https://github.com/atanubhowmick";
 
 const navItems = [
-  ["About", "about"],
-  ["Capabilities", "capabilities"],
-  ["Experience", "experience"],
-  ["Qualifications", "qualifications"],
-  ["Contact", "contact"],
+  { label: "Home", href: "/", isRoute: true },
+  { label: "Projects", href: "/projects", isRoute: true },
+  { label: "Skills", href: "/skills", isRoute: true },
+  { label: "Experience", href: "#experience", isRoute: false },
+  { label: "Contact", href: "#contact", isRoute: false },
 ] as const;
-
-const pillars = [
-  {
-    number: "01",
-    title: "Technology & Code",
-    copy: "Building fluency in web development, programming and the digital products that make ideas usable.",
-    icon: Code2,
-    color: "text-sky-300",
-  },
-  {
-    number: "02",
-    title: "People & Communication",
-    copy: "Client handling, sales conversations and team coordination grounded in clarity and trust.",
-    icon: Users,
-    color: "text-indigo-300",
-  },
-  {
-    number: "03",
-    title: "Events & Operations",
-    copy: "From vendors and artists to logistics and security, I keep complex on-ground work moving.",
-    icon: BriefcaseBusiness,
-    color: "text-amber-300",
-  },
-  {
-    number: "04",
-    title: "Problem Solving",
-    copy: "Taking ownership when plans change, staying calm under pressure and finding the next best move.",
-    icon: Lightbulb,
-    color: "text-emerald-300",
-  },
-];
 
 const experiences = [
   {
-    year: "COLLEGE LEADERSHIP",
-    title: "Logistics & Security Head",
-    org: "College mega event operations",
-    copy: "Coordinated artists, vendors, security teams and volunteers across a high-energy live event. Balanced people, timings and safety while resolving issues in real time.",
-    icon: ShieldCheck,
+    year: "2024 — PRESENT",
+    title: "Data Engineering & AI Projects",
+    org: "Independent / Open Source",
+    copy: "Building end-to-end data pipelines, ML model deployment pipelines, and real-time analytics systems. Focus on Apache Spark, Kafka, Airflow, and cloud-native architectures.",
+    icon: Database,
     accent: "sky",
   },
   {
-    year: "PROFESSIONAL EXPERIENCE",
-    title: "Business Development & Sales",
-    org: "Client-facing growth & communication",
-    copy: "Built confidence in prospect conversations, pitch presentations, client handling and understanding the needs behind a business requirement.",
-    icon: Users,
+    year: "2023 — 2024",
+    title: "MLOps & Model Deployment",
+    org: "Personal Projects & Learning",
+    copy: "Designed CI/CD pipelines for ML models using MLflow, Kubeflow, and Docker. Implemented model monitoring, drift detection, and automated retraining workflows.",
+    icon: Brain,
     accent: "indigo",
   },
   {
-    year: "PROFESSIONAL EXPERIENCE",
-    title: "Quality Control & Operations",
-    org: "Process-focused execution",
-    copy: "Developed a detail-oriented approach to quality, standards, process monitoring and practical improvements that help teams deliver consistently.",
-    icon: Zap,
+    year: "2022 — 2023",
+    title: "Cloud Infrastructure & DevOps",
+    org: "Self-Directed / Certifications",
+    copy: "Architected scalable infrastructure on AWS/GCP using Terraform, Kubernetes, and GitOps. Built CI/CD pipelines with GitHub Actions and ArgoCD.",
+    icon: Server,
     accent: "amber",
   },
   {
-    year: "CURRENT DIRECTION",
-    title: "Web Development Practitioner",
-    org: "Learning by building",
-    copy: "Growing technical skills through hands-on practice with web development, programming and modern digital experiences that connect technology with people.",
-    icon: Terminal,
+    year: "2021 — 2022",
+    title: "Full-Stack Development",
+    org: "Freelance & Coursework",
+    copy: "Developed React/TypeScript frontends and Python/Go backends. Built REST APIs, GraphQL services, and real-time applications with WebSockets.",
+    icon: Code2,
     accent: "emerald",
   },
 ];
 
-type SkillCategory = "All" | "Technology" | "Events & Ops" | "Marketing & BD";
+type SkillCategory = "All" | "Data Engineering" | "AI/ML" | "Cloud & DevOps" | "Software";
 
-const skills: { name: string; category: Exclude<SkillCategory, "All">; detail: string }[] = [
-  { name: "HTML & CSS", category: "Technology", detail: "Responsive interfaces" },
-  { name: "JavaScript", category: "Technology", detail: "Programming foundations" },
-  { name: "Web Development", category: "Technology", detail: "Digital product thinking" },
-  { name: "Vendor Coordination", category: "Events & Ops", detail: "Reliable execution" },
-  { name: "Logistics Planning", category: "Events & Ops", detail: "Moving parts, aligned" },
-  { name: "Security Protocols", category: "Events & Ops", detail: "People-first safety" },
-  { name: "Client Handling", category: "Marketing & BD", detail: "Clear communication" },
-  { name: "Sales & Pitching", category: "Marketing & BD", detail: "Connecting value" },
-  { name: "Team Leadership", category: "Marketing & BD", detail: "Shared ownership" },
+const skills: { name: string; category: Exclude<SkillCategory, "All">; detail: string; proficiency: number }[] = [
+  { name: "Apache Spark", category: "Data Engineering", detail: "Distributed data processing", proficiency: 85 },
+  { name: "Apache Kafka", category: "Data Engineering", detail: "Event streaming & messaging", proficiency: 80 },
+  { name: "Apache Airflow", category: "Data Engineering", detail: "Workflow orchestration", proficiency: 85 },
+  { name: "dbt", category: "Data Engineering", detail: "Data transformation & modeling", proficiency: 80 },
+  { name: "Snowflake / BigQuery", category: "Data Engineering", detail: "Cloud data warehousing", proficiency: 75 },
+  { name: "Python (Pandas, Polars)", category: "Data Engineering", detail: "Data manipulation & analysis", proficiency: 90 },
+  { name: "SQL / NoSQL", category: "Data Engineering", detail: "Database design & optimization", proficiency: 85 },
+  { name: "PyTorch / TensorFlow", category: "AI/ML", detail: "Deep learning frameworks", proficiency: 80 },
+  { name: "MLflow / Kubeflow", category: "AI/ML", detail: "MLOps & experiment tracking", proficiency: 75 },
+  { name: "Hugging Face", category: "AI/ML", detail: "Transformers & LLMs", proficiency: 80 },
+  { name: "LangChain / LlamaIndex", category: "AI/ML", detail: "LLM application frameworks", proficiency: 70 },
+  { name: "Model Serving (Triton, BentoML)", category: "AI/ML", detail: "Production model deployment", proficiency: 70 },
+  { name: "AWS / GCP", category: "Cloud & DevOps", detail: "Cloud platforms", proficiency: 80 },
+  { name: "Kubernetes / Docker", category: "Cloud & DevOps", detail: "Container orchestration", proficiency: 80 },
+  { name: "Terraform", category: "Cloud & DevOps", detail: "Infrastructure as code", proficiency: 75 },
+  { name: "GitHub Actions / ArgoCD", category: "Cloud & DevOps", detail: "CI/CD & GitOps", proficiency: 80 },
+  { name: "Prometheus / Grafana", category: "Cloud & DevOps", detail: "Observability & monitoring", proficiency: 70 },
+  { name: "React / TypeScript", category: "Software", detail: "Frontend development", proficiency: 85 },
+  { name: "FastAPI / Go", category: "Software", detail: "Backend API development", proficiency: 85 },
+  { name: "PostgreSQL / Redis", category: "Software", detail: "Databases & caching", proficiency: 80 },
+  { name: "Git / Testing", category: "Software", detail: "Version control & quality", proficiency: 90 },
+];
+
+const qualifications = [
+  {
+    title: "B.Tech Electrical Engineering",
+    org: "University",
+    year: "2021",
+    icon: BriefcaseBusiness,
+    color: "sky",
+    details: [
+      "Strong foundation in mathematics, algorithms, and systems thinking",
+      "Coursework: Data Structures, Algorithms, Signal Processing, Control Systems",
+      "Capstone: Real-time signal processing pipeline implementation",
+    ],
+  },
+  {
+    title: "AWS Solutions Architect Associate",
+    org: "Amazon Web Services",
+    year: "2024",
+    icon: Server,
+    color: "amber",
+    details: [
+      "Designing resilient, scalable, and cost-optimized architectures",
+      "Data lakes, analytics services, and serverless patterns",
+    ],
+  },
+  {
+    title: "Google Cloud Professional Data Engineer",
+    org: "Google Cloud",
+    year: "2024",
+    icon: Database,
+    color: "sky",
+    details: [
+      "Designing data processing systems on GCP",
+      "BigQuery, Dataflow, Pub/Sub, and Dataproc expertise",
+    ],
+  },
+  {
+    title: "TensorFlow Developer Certificate",
+    org: "Google",
+    year: "2023",
+    icon: Brain,
+    color: "indigo",
+    details: [
+      "Building and training neural networks with TensorFlow",
+      "Computer vision, NLP, and time series forecasting",
+    ],
+  },
 ];
 
 function SectionHeading({ overline, title, copy, id }: { overline: string; title: string; copy?: string; id: string }) {
@@ -143,8 +167,6 @@ function copyToClipboard(value: string, label: string) {
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [skillCategory, setSkillCategory] = useState<SkillCategory>("All");
-  const [qualificationOpen, setQualificationOpen] = useState(false);
-  const [formSent, setFormSent] = useState(false);
 
   const visibleSkills = skillCategory === "All" ? skills : skills.filter((skill) => skill.category === skillCategory);
 
@@ -154,7 +176,6 @@ export default function Home() {
     const name = String(form.get("name") ?? "");
     const subject = String(form.get("subject") ?? "Portfolio inquiry");
     const message = String(form.get("message") ?? "");
-    setFormSent(true);
     toast.success("Your email draft is ready to send");
     window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Hi Atanu,\n\n${message}\n\nFrom: ${name}`)}`;
   }
@@ -169,23 +190,35 @@ export default function Home() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
           <a href="#top" className="group flex items-center gap-3" data-testid="nav-brand-logo" onClick={() => setMobileMenuOpen(false)}>
             <span className="grid h-10 w-10 place-items-center rounded-xl border border-sky-400/40 bg-sky-400/10 font-mono text-sm font-bold text-sky-300 shadow-[0_0_22px_rgba(56,189,248,0.15)]">AB</span>
-            <span className="hidden text-sm font-semibold tracking-wide text-slate-100 sm:block">ATANU <span className="text-slate-500">/</span> PORTFOLIO</span>
+            <span className="hidden text-sm font-semibold tracking-wide text-slate-100 sm:block">ATANU <span className="text-slate-500">/</span> DATA & AI</span>
           </a>
           <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary navigation" data-testid="desktop-navigation">
-            {navItems.map(([label, id]) => (
-              <a key={id} href={`#${id}`} className="nav-link text-xs font-medium uppercase tracking-[0.16em] text-slate-400 hover:text-sky-300" data-testid={`nav-link-${id}`}>{label}</a>
+            {navItems.map((item) => (
+              <a key={item.label} href={item.href} className="nav-link text-xs font-medium uppercase tracking-[0.16em] text-slate-400 hover:text-sky-300" data-testid={`nav-link-${item.label.toLowerCase()}`}>{item.label}</a>
             ))}
           </nav>
-          <a href={`mailto:${email}`} className="hidden items-center gap-2 rounded-full bg-sky-400 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-slate-950 transition-transform hover:-translate-y-0.5 sm:flex" data-testid="nav-connect-cta">Let's connect <ArrowUpRight size={15} /></a>
+          <div className="hidden items-center gap-3 sm:flex">
+            <a href={github} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-sky-300 transition-colors" data-testid="nav-github" aria-label="GitHub">
+              <GitBranch size={18} />
+            </a>
+            <a href={linkedIn} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-sky-300 transition-colors" data-testid="nav-linkedin" aria-label="LinkedIn">
+              <Linkedin size={18} />
+            </a>
+            <a href={`mailto:${email}`} className="hidden items-center gap-2 rounded-full bg-sky-400 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-slate-950 transition-transform hover:-translate-y-0.5 sm:flex" data-testid="nav-connect-cta">Contact <ArrowUpRight size={15} /></a>
+          </div>
           <Button variant="ghost" size="icon" className="text-slate-200 hover:bg-white/10 hover:text-sky-300 lg:hidden" onClick={() => setMobileMenuOpen((open) => !open)} aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"} data-testid="mobile-menu-toggle-button">
             {mobileMenuOpen ? <X size={21} /> : <Menu size={21} />}
           </Button>
         </div>
         {mobileMenuOpen && (
           <nav className="border-t border-white/[0.08] px-5 py-4 lg:hidden" aria-label="Mobile navigation" data-testid="mobile-navigation">
-            {navItems.map(([label, id]) => (
-              <a key={id} href={`#${id}`} onClick={() => setMobileMenuOpen(false)} className="block border-b border-white/[0.06] py-3 text-xs font-medium uppercase tracking-[0.16em] text-slate-300 hover:text-sky-300" data-testid={`mobile-nav-link-${id}`}>{label}</a>
+            {navItems.map((item) => (
+              <a key={item.label} href={item.href} onClick={() => setMobileMenuOpen(false)} className="block border-b border-white/[0.06] py-3 text-xs font-medium uppercase tracking-[0.16em] text-slate-300 hover:text-sky-300" data-testid={`mobile-nav-link-${item.label.toLowerCase()}`}>{item.label}</a>
             ))}
+            <div className="flex items-center gap-3 pt-3">
+              <a href={github} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-sky-300" aria-label="GitHub"><GitBranch size={18} /></a>
+              <a href={linkedIn} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-sky-300" aria-label="LinkedIn"><Linkedin size={18} /></a>
+            </div>
           </nav>
         )}
       </header>
@@ -195,74 +228,294 @@ export default function Home() {
           <div className="hero-reveal">
             <div className="mb-7 flex items-center gap-3" data-testid="hero-availability">
               <span className="live-dot h-2 w-2 rounded-full bg-emerald-300" />
-              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-emerald-300">Open to meaningful opportunities</span>
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-emerald-300">Open to Data Engineering & AI roles</span>
             </div>
-            <p className="section-kicker" data-testid="hero-eyebrow">Technology × People × Execution</p>
+            <p className="section-kicker" data-testid="hero-eyebrow">Data Engineering × AI Engineering × Cloud</p>
             <h1 className="mt-5 max-w-4xl text-5xl font-bold leading-[0.98] tracking-[-0.055em] text-white sm:text-7xl lg:text-[5.8rem]" data-testid="hero-title">Hi, I'm <span className="hero-gradient">Atanu Bhowmick</span></h1>
-            <p className="mt-7 max-w-2xl text-lg leading-relaxed text-slate-400 sm:text-xl" data-testid="hero-role-badge">B.Tech Electrical Engineer with a hands-on edge in web development, marketing, events and operations.</p>
+            <p className="mt-7 max-w-2xl text-lg leading-relaxed text-slate-400 sm:text-xl" data-testid="hero-role-badge">Building scalable data platforms, ML systems, and cloud-native infrastructure. Electrical engineer turned data & AI practitioner.</p>
             <div className="mt-8 flex flex-wrap gap-2" data-testid="hero-pillar-list">
-              {["Web development", "Event leadership", "Sales & BD", "Quality control"].map((item, index) => <Badge key={item} variant="outline" className={`rounded-full border-white/10 bg-white/[0.03] px-3 py-1.5 text-[11px] font-medium ${index === 0 ? "text-sky-300" : "text-slate-400"}`} data-testid={`hero-pillar-${index + 1}`}>{item}</Badge>)}
+              {["Data Pipelines", "MLOps", "Cloud Architecture", "Full-Stack"].map((item, index) => <Badge key={item} variant="outline" className={`rounded-full border-white/10 bg-white/[0.03] px-3 py-1.5 text-[11px] font-medium ${index === 0 ? "text-sky-300" : "text-slate-400"}`} data-testid={`hero-pillar-${index + 1}`}>{item}</Badge>)}
             </div>
             <div className="mt-10 flex flex-wrap items-center gap-3" data-testid="hero-actions">
-              <a href={`mailto:${email}`} className="inline-flex items-center gap-2 rounded-lg bg-sky-400 px-5 py-3 text-sm font-bold text-slate-950 transition-all hover:-translate-y-1 hover:bg-sky-300 hover:shadow-[0_0_25px_rgba(56,189,248,0.3)]" data-testid="hero-email-button">Connect via mail <ArrowUpRight size={16} /></a>
-              <a href={linkedIn} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-5 py-3 text-sm font-semibold text-slate-200 transition-all hover:-translate-y-1 hover:border-sky-400/40 hover:bg-white/[0.04]" data-testid="hero-linkedin-link"><Linkedin size={16} /> LinkedIn profile</a>
-              <a href="#resumes" className="inline-flex items-center gap-2 px-2 py-3 text-sm font-semibold text-slate-400 transition-colors hover:text-sky-300" data-testid="hero-connect-cta">View resumes <ChevronRight size={16} /></a>
+              <a href={`mailto:${email}`} className="inline-flex items-center gap-2 rounded-lg bg-sky-400 px-5 py-3 text-sm font-bold text-slate-950 transition-all hover:-translate-y-1 hover:bg-sky-300 hover:shadow-[0_0_25px_rgba(56,189,248,0.3)]" data-testid="hero-email-button">Get in touch <ArrowUpRight size={16} /></a>
+              <a href={linkedIn} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-5 py-3 text-sm font-semibold text-slate-200 transition-all hover:-translate-y-1 hover:border-sky-400/40 hover:bg-white/[0.04]" data-testid="hero-linkedin-link"><Linkedin size={16} /> LinkedIn</a>
+              <a href={github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-5 py-3 text-sm font-semibold text-slate-200 transition-all hover:-translate-y-1 hover:border-sky-400/40 hover:bg-white/[0.04]" data-testid="hero-github-link"><GitBranch size={16} /> GitHub</a>
             </div>
-            <div className="mt-12 grid max-w-lg grid-cols-2 gap-5 border-t border-white/[0.08] pt-6 sm:grid-cols-3" data-testid="hero-facts">
-              <div><p className="font-mono text-2xl font-bold text-white" data-testid="hero-fact-one-value">4+</p><p className="mt-1 text-xs uppercase tracking-[0.12em] text-slate-500" data-testid="hero-fact-one-label">Working pillars</p></div>
-              <div><p className="font-mono text-2xl font-bold text-white" data-testid="hero-fact-two-value">360°</p><p className="mt-1 text-xs uppercase tracking-[0.12em] text-slate-500" data-testid="hero-fact-two-label">Ownership mindset</p></div>
-              <div><p className="font-mono text-2xl font-bold text-white" data-testid="hero-fact-three-value">1</p><p className="mt-1 text-xs uppercase tracking-[0.12em] text-slate-500" data-testid="hero-fact-three-label">Curious learner</p></div>
+            <div className="mt-12 grid max-w-lg grid-cols-2 gap-5 border-t border-white/[0.08] pt-6 sm:grid-cols-4" data-testid="hero-facts">
+              <div><p className="font-mono text-2xl font-bold text-white" data-testid="hero-fact-one-value">4+</p><p className="mt-1 text-xs uppercase tracking-[0.12em] text-slate-500" data-testid="hero-fact-one-label">Core Domains</p></div>
+              <div><p className="font-mono text-2xl font-bold text-white" data-testid="hero-fact-two-value">20+</p><p className="mt-1 text-xs uppercase tracking-[0.12em] text-slate-500" data-testid="hero-fact-two-label">Technologies</p></div>
+              <div><p className="font-mono text-2xl font-bold text-white" data-testid="hero-fact-three-value">10+</p><p className="mt-1 text-xs uppercase tracking-[0.12em] text-slate-500" data-testid="hero-fact-three-label">Projects Built</p></div>
+              <div><p className="font-mono text-2xl font-bold text-white" data-testid="hero-fact-four-value">∞</p><p className="mt-1 text-xs uppercase tracking-[0.12em] text-slate-500" data-testid="hero-fact-four-label">Curiosity</p></div>
             </div>
           </div>
           <div className="relative mx-auto w-full max-w-[33rem] hero-art" data-testid="hero-visual">
             <div className="absolute -inset-5 rounded-[2rem] border border-sky-400/10 bg-sky-400/[0.03] blur-sm" />
             <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-900/80 p-2 shadow-[0_0_70px_rgba(56,189,248,0.12)]">
               <div className="relative aspect-[0.92] overflow-hidden rounded-[1.05rem] bg-[#101b2d]">
-                <img src={eventImage} alt="Blue-lit technology event stage with a live audience" className="h-full w-full object-cover opacity-75 mix-blend-screen" data-testid="hero-event-image" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#090d16] via-transparent to-sky-400/10" />
-                <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full border border-white/10 bg-[#090d16]/70 px-3 py-1.5 backdrop-blur-md" data-testid="hero-live-chip"><span className="live-dot h-1.5 w-1.5 rounded-full bg-emerald-300" /><span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300">On-ground / Online</span></div>
-                <div className="absolute bottom-6 left-6 right-6" data-testid="hero-visual-caption"><p className="font-mono text-[10px] uppercase tracking-[0.22em] text-sky-300">The operating principle</p><p className="mt-2 max-w-sm text-2xl font-semibold leading-tight text-white">Make the idea work in the real world.</p></div>
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(56,189,248,0.1)_0%,rgba(99,102,241,0.1)_50%,rgba(139,92,246,0.1)_100%)]" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center p-8">
+                    <div className="flex justify-center gap-4 mb-6">
+                      <Database className="text-sky-300 text-5xl opacity-80" size={48} />
+                      <Zap className="text-amber-300 text-5xl opacity-80" size={48} />
+                      <Brain className="text-indigo-300 text-5xl opacity-80" size={48} />
+                    </div>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-sky-300">Data → Intelligence → Action</p>
+                    <p className="mt-2 max-w-sm text-2xl font-semibold leading-tight text-white">Scalable pipelines powering AI at scale</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="absolute -bottom-5 -left-3 rounded-xl border border-white/10 bg-[#121e36]/95 p-4 shadow-2xl backdrop-blur-xl sm:-left-8" data-testid="hero-stat-card"><p className="font-mono text-[10px] uppercase tracking-[0.17em] text-slate-500">Strength</p><p className="mt-1 text-lg font-semibold text-white">Calm under pressure</p><div className="mt-3 h-1 w-36 overflow-hidden rounded-full bg-white/10"><div className="h-full w-[84%] rounded-full bg-gradient-to-r from-sky-400 to-indigo-300" /></div></div>
-            <div className="absolute -right-3 top-16 rounded-lg border border-sky-400/20 bg-[#0f172a]/90 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-sky-300 backdrop-blur-xl sm:-right-8" data-testid="hero-tech-chip"><Sparkles size={13} className="mr-2 inline" /> Tech × Operations</div>
+            <div className="absolute -bottom-5 -left-3 rounded-xl border border-white/10 bg-[#121e36]/95 p-4 shadow-2xl backdrop-blur-xl sm:-left-8" data-testid="hero-stat-card"><p className="font-mono text-[10px] uppercase tracking-[0.17em] text-slate-500">Focus</p><p className="mt-1 text-lg font-semibold text-white">Production-Ready Data & AI</p><div className="mt-3 h-1 w-36 overflow-hidden rounded-full bg-white/10"><div className="h-full w-[90%] rounded-full bg-gradient-to-r from-sky-400 to-indigo-300" /></div></div>
+            <div className="absolute -right-3 top-16 rounded-lg border border-sky-400/20 bg-[#0f172a]/90 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-sky-300 backdrop-blur-xl sm:-right-8" data-testid="hero-tech-chip"><Sparkles size={13} className="mr-2 inline" /> Data × AI × Cloud</div>
           </div>
         </section>
 
-        <section id="about" className="section-shell" data-testid="about-section-container">
+        <section id="projects" className="section-shell" data-testid="projects-section-container">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
-            <SectionHeading id="about" overline="01 / WHO I AM" title="A builder with an operator's instinct." copy="I enjoy exploring different fields, learning by doing and taking responsibility. My edge is the space between a good idea and the detail required to make it happen." />
-            <div className="grid gap-6 lg:grid-cols-12">
-              <Card className="card-surface lg:col-span-7" data-testid="about-story-card"><CardContent className="p-6 sm:p-8 lg:p-10"><div className="flex items-start justify-between gap-5"><Quote className="text-sky-300" size={32} /><span className="font-mono text-xs text-slate-600">ATANU / 2024—NOW</span></div><p className="mt-8 text-xl leading-relaxed text-slate-200 sm:text-2xl" data-testid="about-story-copy">My B.Tech in Electrical Engineering gave me a structured way to think. College events taught me to work with people, logistics and real-time pressure. Professional roles in business development, sales and quality control taught me to listen, communicate and deliver with care.</p><p className="mt-6 leading-relaxed text-slate-400" data-testid="about-story-detail">Now I am bringing those lessons into technology — building my skills in web development and programming while staying curious about marketing, event management, operations and project coordination.</p></CardContent></Card>
-              <div className="grid gap-6 sm:grid-cols-2 lg:col-span-5"><div className="card-surface flex min-h-[190px] flex-col justify-between" data-testid="about-engineering-card"><div className="flex items-center justify-between"><Code2 className="text-sky-300" size={24} /><span className="font-mono text-xs text-slate-600">MINDSET A</span></div><div><p className="text-lg font-semibold text-white" data-testid="about-engineering-title">Engineering mindset</p><p className="mt-2 text-sm leading-relaxed text-slate-400" data-testid="about-engineering-copy">Break the problem down, understand the system, improve the outcome.</p></div></div><div className="card-surface flex min-h-[190px] flex-col justify-between border-amber-300/20" data-testid="about-event-card"><div className="flex items-center justify-between"><BriefcaseBusiness className="text-amber-300" size={24} /><span className="font-mono text-xs text-slate-600">MINDSET B</span></div><div><p className="text-lg font-semibold text-white" data-testid="about-event-title">Event orchestration</p><p className="mt-2 text-sm leading-relaxed text-slate-400" data-testid="about-event-copy">Align people, timing and details so the experience feels effortless.</p></div></div></div>
+            <SectionHeading id="projects" overline="01 / FEATURED PROJECTS" title="End-to-end data & AI systems." copy="Production-grade projects demonstrating real-world data engineering and ML engineering patterns." />
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {[
+                {
+                  title: "Real-Time Analytics Platform",
+                  description: "Kafka + Spark Streaming + ClickHouse pipeline processing 1M+ events/sec with sub-second latency dashboards.",
+                  tags: ["Kafka", "Spark", "ClickHouse", "Airflow", "Docker"],
+                  icon: Zap,
+                  color: "amber",
+                  link: "#",
+                },
+                {
+                  title: "ML Feature Store & Pipeline",
+                  description: "Centralized feature store with Feast, automated feature engineering, and point-in-time correctness for ML models.",
+                  tags: ["Feast", "Airflow", "PostgreSQL", "Python", "Great Expectations"],
+                  icon: Database,
+                  color: "sky",
+                  link: "#",
+                },
+                {
+                  title: "LLM RAG Pipeline for Docs",
+                  description: "Production RAG system with LangChain, vector database, hybrid search, and evaluation framework for hallucination detection.",
+                  tags: ["LangChain", "Pinecone", "OpenAI", "FastAPI", "LangSmith"],
+                  icon: Brain,
+                  color: "indigo",
+                  link: "#",
+                },
+                {
+                  title: "Data Quality Observatory",
+                  description: "Automated data quality monitoring with Soda Core, anomaly detection, Slack alerts, and lineage tracking.",
+                  tags: ["Soda Core", "Airflow", "dbt", "Slack API", "Grafana"],
+                  icon: Clipboard,
+                  color: "emerald",
+                  link: "#",
+                },
+                {
+                  title: "Kubernetes ML Platform",
+                  description: "Kubeflow-based ML platform with model registry, pipeline orchestration, KServe inference, and GitOps deployment.",
+                  tags: ["Kubeflow", "KServe", "ArgoCD", "MLflow", "Prometheus"],
+                  icon: Server,
+                  color: "amber",
+                  link: "#",
+                },
+                {
+                  title: "Streaming ETL with Flink",
+                  description: "Exactly-once streaming ETL for CDC data with schema evolution, late arrival handling, and iceberg table format.",
+                  tags: ["Flink", "Kafka", "Iceberg", "Debezium", "Schema Registry"],
+                  icon: GitBranch,
+                  color: "sky",
+                  link: "#",
+                },
+              ].map((project, index) => (
+                <Card key={index} className="card-surface group hover:border-white/10 transition-colors" data-testid={`project-card-${index}`}>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div className={`grid h-10 w-10 place-items-center rounded-xl bg-${project.color}-400/10 text-${project.color}-300`}>
+                        <project.icon size={20} />
+                      </div>
+                      <span className="font-mono text-xs text-slate-600">PROJECT / 0{index + 1}</span>
+                    </div>
+                    <h3 className="mt-6 text-xl font-semibold text-white group-hover:text-sky-300 transition-colors" data-testid={`project-title-${index}`}>{project.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-400" data-testid={`project-description-${index}`}>{project.description}</p>
+                    <div className="mt-5 flex flex-wrap gap-1.5" data-testid={`project-tags-${index}`}>
+                      {project.tags.map((tag) => (
+                        <Badge key={tag} variant="outline" className="border-white/10 bg-white/[0.03] text-slate-400 hover:text-sky-300 hover:border-sky-400/30 text-[10px]">{tag}</Badge>
+                      ))}
+                    </div>
+                    <a href={project.link} className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-sky-300 hover:text-white transition-colors" data-testid={`project-link-${index}`}>View code <ArrowUpRight size={14} /></a>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            <div className="mt-10 text-center" data-testid="projects-cta">
+              <a href="/projects" className="inline-flex items-center gap-2 rounded-lg bg-sky-400 px-6 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-sky-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.3)]" data-testid="projects-view-all-button">View all projects <ArrowUpRight size={16} /></a>
             </div>
           </div>
         </section>
 
-        <section id="capabilities" className="section-shell border-y border-white/[0.05] bg-[#0f172a]/30" data-testid="capabilities-section">
-          <div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading id="capabilities" overline="02 / WHAT I BRING" title="Useful across the whole room." copy="A multidisciplinary toolkit for turning conversations, constraints and creative ideas into coordinated action." /><div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">{pillars.map(({ number, title, copy, icon: Icon, color }) => <Card key={number} className="card-surface group" data-testid={`capability-card-${number}`}><CardContent className="p-6"><div className="flex items-center justify-between"><span className="font-mono text-xs text-slate-600">{number}</span><Icon className={`${color} transition-transform duration-300 group-hover:scale-110`} size={24} /></div><h3 className="mt-14 text-xl font-semibold tracking-tight text-white" data-testid={`capability-title-${number}`}>{title}</h3><p className="mt-3 text-sm leading-relaxed text-slate-400" data-testid={`capability-copy-${number}`}>{copy}</p><ArrowUpRight className="mt-8 text-slate-600 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-sky-300" size={18} /></CardContent></Card>)}</div></div>
+        <section id="skills" className="section-shell border-y border-white/[0.05] bg-[#0f172a]/30" data-testid="skills-section">
+          <div className="mx-auto max-w-7xl px-5 lg:px-8">
+            <SectionHeading id="skills" overline="02 / TECHNICAL EXPERTISE" title="Tools and technologies I use daily." copy="Depth across the modern data stack, with production experience in each category." />
+            <div className="mb-8 flex flex-wrap items-center gap-2" data-testid="skills-filter" role="group" aria-label="Filter skills by category">
+              {(["All", "Data Engineering", "AI/ML", "Cloud & DevOps", "Software"] as SkillCategory[]).map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSkillCategory(cat)}
+                  className={`px-4 py-2 rounded-full text-xs font-medium uppercase tracking-[0.1em] transition-all ${
+                    skillCategory === cat
+                      ? "bg-sky-400 text-slate-950 shadow-[0_0_15px_rgba(56,189,248,0.3)]"
+                      : "bg-white/[0.03] border border-white/10 text-slate-400 hover:text-sky-300 hover:border-sky-400/30"
+                  }`}
+                  data-testid={`skill-filter-${cat.toLowerCase().replace(/[&/\s]+/g, "-")}`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" data-testid="skills-grid">
+              {visibleSkills.map((skill) => (
+                <Card key={skill.name} className="card-surface group" data-testid={`skill-card-${skill.name.toLowerCase().replace(/\s+/g, "-")}`}>
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <h3 className="font-semibold text-white group-hover:text-sky-300 transition-colors truncate" data-testid={`skill-name-${skill.name.toLowerCase().replace(/\s+/g, "-")}`}>{skill.name}</h3>
+                        <p className="mt-1 text-xs text-slate-500 truncate" data-testid={`skill-detail-${skill.name.toLowerCase().replace(/\s+/g, "-")}`}>{skill.detail}</p>
+                      </div>
+                      <span className={`font-mono text-xs px-2 py-0.5 rounded bg-${skill.category === "Data Engineering" ? "sky" : skill.category === "AI/ML" ? "indigo" : skill.category === "Cloud & DevOps" ? "amber" : "emerald"}-400/10 text-${skill.category === "Data Engineering" ? "sky" : skill.category === "AI/ML" ? "indigo" : skill.category === "Cloud & DevOps" ? "amber" : "emerald"}-300`} data-testid={`skill-category-${skill.name.toLowerCase().replace(/\s+/g, "-")}`}>
+                        {skill.category}
+                      </span>
+                    </div>
+                    <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-white/10" data-testid={`skill-bar-${skill.name.toLowerCase().replace(/\s+/g, "-")}`}>
+                      <div className={`h-full rounded-full bg-gradient-to-r from-sky-400 to-indigo-300 transition-all duration-1000`} style={{ width: `${skill.proficiency}%` }} />
+                    </div>
+                    <p className="mt-2 text-right font-mono text-xs text-slate-500" data-testid={`skill-proficiency-${skill.name.toLowerCase().replace(/\s+/g, "-")}`}>{skill.proficiency}%</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            <div className="mt-10 text-center" data-testid="skills-cta">
+              <a href="/skills" className="inline-flex items-center gap-2 rounded-lg bg-sky-400 px-6 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-sky-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.3)]" data-testid="skills-view-all-button">View all skills <ArrowUpRight size={16} /></a>
+            </div>
+          </div>
         </section>
 
         <section id="experience" className="section-shell" data-testid="experience-section">
-          <div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading id="experience" overline="03 / EXPERIENCE" title="Built through responsibility." copy="Each chapter added a new way to contribute — from keeping people safe to keeping projects moving." /><div className="relative ml-3 border-l border-white/10 pl-8 sm:ml-8 sm:pl-12">{experiences.map(({ year, title, org, copy, icon: Icon, accent }, index) => <div key={title} className="relative mb-10 last:mb-0" data-testid={`timeline-item-${index + 1}`}><div className={`absolute -left-[43px] top-1 grid h-6 w-6 place-items-center rounded-full border border-${accent}-300/50 bg-[#090d16] text-${accent}-300 sm:-left-[61px]`}><Icon size={12} /></div><div className="grid gap-4 lg:grid-cols-[180px_1fr] lg:gap-10"><div><p className="font-mono text-[10px] uppercase tracking-[0.16em] text-sky-300" data-testid={`timeline-year-${index + 1}`}>{year}</p><p className="mt-2 text-xs text-slate-600" data-testid={`timeline-index-${index + 1}`}>0{index + 1} / 04</p></div><Card className="card-surface" data-testid={`timeline-card-${index + 1}`}><CardContent className="p-6 sm:p-7"><div className="flex flex-wrap items-baseline justify-between gap-2"><h3 className="text-xl font-semibold text-white" data-testid={`timeline-title-${index + 1}`}>{title}</h3><span className="text-xs text-slate-500" data-testid={`timeline-org-${index + 1}`}>{org}</span></div><p className="mt-4 max-w-3xl leading-relaxed text-slate-400" data-testid={`timeline-copy-${index + 1}`}>{copy}</p></CardContent></Card></div></div>)}</div></div>
+          <div className="mx-auto max-w-7xl px-5 lg:px-8">
+            <SectionHeading id="experience" overline="03 / JOURNEY" title="From circuits to distributed systems." copy="An electrical engineering foundation applied to modern data and AI challenges." />
+            <div className="relative ml-3 border-l border-white/10 pl-8 sm:ml-8 sm:pl-12">
+              {experiences.map(({ year, title, org, copy, icon: Icon, accent }, index) => (
+                <div key={title} className="relative mb-10 last:mb-0" data-testid={`timeline-item-${index + 1}`}>
+                  <div className={`absolute -left-[43px] top-1 grid h-6 w-6 place-items-center rounded-full border border-${accent}-300/50 bg-[#090d16] text-${accent}-300 sm:-left-[61px]`}>
+                    <Icon size={12} />
+                  </div>
+                  <div className="grid gap-4 lg:grid-cols-[180px_1fr] lg:gap-10">
+                    <div>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-sky-300" data-testid={`timeline-year-${index + 1}`}>{year}</p>
+                      <p className="mt-2 text-xs text-slate-600" data-testid={`timeline-index-${index + 1}`}>0{index + 1} / 04</p>
+                    </div>
+                    <Card className="card-surface" data-testid={`timeline-card-${index + 1}`}>
+                      <CardContent className="p-6 sm:p-7">
+                        <div className="flex flex-wrap items-baseline justify-between gap-2">
+                          <h3 className="text-xl font-semibold text-white" data-testid={`timeline-title-${index + 1}`}>{title}</h3>
+                          <span className="text-xs text-slate-500" data-testid={`timeline-org-${index + 1}`}>{org}</span>
+                        </div>
+                        <p className="mt-4 max-w-3xl leading-relaxed text-slate-400" data-testid={`timeline-copy-${index + 1}`}>{copy}</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section id="qualifications" className="section-shell border-y border-white/[0.05] bg-[#0f172a]/30" data-testid="qualifications-section">
-          <div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading id="qualifications" overline="04 / QUALIFICATIONS" title="The foundation behind the range." copy="Formal engineering training, strengthened by practical experiences and a steady habit of self-directed learning." /><div className="grid gap-6 lg:grid-cols-[.82fr_1.18fr]"><Card className="card-surface overflow-hidden" data-testid="qualification-card"><CardContent className="relative p-7 sm:p-9"><div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-sky-400/10 blur-3xl" /><div className="relative"><div className="flex items-start justify-between"><span className="grid h-12 w-12 place-items-center rounded-xl bg-sky-400/10 text-sky-300"><BriefcaseBusiness size={22} /></span><span className="font-mono text-xs text-slate-600">EDUCATION / 01</span></div><p className="mt-10 font-mono text-[10px] uppercase tracking-[0.18em] text-sky-300" data-testid="qualification-overline">B.Tech Graduate</p><h3 className="mt-2 text-2xl font-semibold text-white" data-testid="qualification-title">Electrical Engineering</h3><p className="mt-4 leading-relaxed text-slate-400" data-testid="qualification-copy">A systems-thinking foundation that keeps me curious about how things work — from circuits and processes to software and people.</p><Button className="mt-8 border border-white/10 bg-white/[0.04] text-slate-200 hover:bg-white/10 hover:text-white" variant="outline" onClick={() => setQualificationOpen(true)} data-testid="qualifications-modal-trigger">View detailed profile <ArrowUpRight size={15} /></Button></div></CardContent></Card><div className="card-surface" data-testid="skills-matrix"><div className="flex flex-col gap-5 border-b border-white/[0.08] pb-6 sm:flex-row sm:items-center sm:justify-between"><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">Skills matrix</p><h3 className="mt-2 text-xl font-semibold text-white" data-testid="skills-matrix-title">Capabilities in motion</h3></div><div className="flex flex-wrap gap-2" role="group" aria-label="Filter skills" data-testid="skills-filter-group">{(["All", "Technology", "Events & Ops", "Marketing & BD"] as SkillCategory[]).map((category) => <button key={category} onClick={() => setSkillCategory(category)} className={`rounded-full border px-3 py-1.5 text-xs transition-all ${skillCategory === category ? "border-sky-400/50 bg-sky-400/10 text-sky-300" : "border-white/10 text-slate-500 hover:border-white/25 hover:text-slate-300"}`} aria-pressed={skillCategory === category} data-testid={`skills-filter-${category.toLowerCase().replaceAll(" ", "-").replaceAll("&", "and")}`}>{category}</button>)}</div></div><div className="grid gap-3 pt-6 sm:grid-cols-2">{visibleSkills.map((skill) => <div key={skill.name} className="rounded-xl border border-white/[0.07] bg-white/[0.025] p-4 transition-colors hover:border-sky-400/30" data-testid={`skill-item-${skill.name.toLowerCase().replaceAll(" ", "-").replaceAll("&", "and")}`}><div className="flex items-center justify-between gap-3"><span className="font-medium text-slate-200" data-testid={`skill-name-${skill.name}`}>{skill.name}</span><Check className="text-emerald-300" size={15} /></div><p className="mt-1 text-xs text-slate-500" data-testid={`skill-detail-${skill.name}`}>{skill.detail}</p></div>)}</div></div></div></div>
-        </section>
-
-        <section id="resumes" className="section-shell" data-testid="resumes-section">
-          <div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading id="resumes" overline="05 / SPECIALIZED TRACKS" title="Two ways to work together." copy="Choose the path that matches your immediate need. Both reflect the same ownership, communication and learning mindset." /><div className="grid gap-6 md:grid-cols-2"><Card className="card-surface group border-sky-400/20" data-testid="resume-software-card"><CardContent className="p-7 sm:p-9"><div className="flex items-center justify-between"><div className="grid h-12 w-12 place-items-center rounded-xl bg-sky-400/10 text-sky-300"><Terminal size={22} /></div><span className="font-mono text-xs text-sky-300">TRACK / 01</span></div><h3 className="mt-10 text-2xl font-semibold text-white" data-testid="resume-software-title">Software & web development</h3><p className="mt-4 leading-relaxed text-slate-400" data-testid="resume-software-copy">For teams looking for a curious engineering graduate developing practical skills across web interfaces, programming and digital products.</p><div className="mt-8 flex flex-wrap gap-2"><Badge variant="outline" className="border-white/10 text-slate-400">Web development</Badge><Badge variant="outline" className="border-white/10 text-slate-400">Programming</Badge><Badge variant="outline" className="border-white/10 text-slate-400">Problem solving</Badge></div><a href="/developer-resume.pdf" target="_blank" rel="noopener noreferrer" className="mt-9 inline-flex items-center gap-2 text-sm font-semibold text-sky-300 transition-colors hover:text-white" data-testid="resume-software-developer-button">Request developer resume <Download size={16} /></a></CardContent></Card><Card className="card-surface group border-amber-300/20" data-testid="resume-event-card"><CardContent className="p-7 sm:p-9"><div className="flex items-center justify-between"><div className="grid h-12 w-12 place-items-center rounded-xl bg-amber-300/10 text-amber-300"><BriefcaseBusiness size={22} /></div><span className="font-mono text-xs text-amber-300">TRACK / 02</span></div><h3 className="mt-10 text-2xl font-semibold text-white" data-testid="resume-event-title">Event management & operations</h3><p className="mt-4 leading-relaxed text-slate-400" data-testid="resume-event-copy">For event teams that need dependable coordination across logistics, security, vendors, artists, teams and fast-moving decisions.</p><div className="mt-8 flex flex-wrap gap-2"><Badge variant="outline" className="border-white/10 text-slate-400">Logistics</Badge><Badge variant="outline" className="border-white/10 text-slate-400">Team coordination</Badge><Badge variant="outline" className="border-white/10 text-slate-400">Live execution</Badge></div><a href={`mailto:${email}?subject=Request%20-%20Event%20Management%20Resume`} className="mt-9 inline-flex items-center gap-2 text-sm font-semibold text-amber-300 transition-colors hover:text-white" data-testid="resume-event-management-button">Request event resume <Download size={16} /></a></CardContent></Card></div></div>
+          <div className="mx-auto max-w-7xl px-5 lg:px-8">
+            <SectionHeading id="qualifications" overline="04 / CERTIFICATIONS & EDUCATION" title="Validated expertise across the stack." copy="Industry-recognized certifications complementing a strong engineering foundation." />
+            <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-4">
+              {qualifications.map((qual, index) => (
+                <Card key={index} className="card-surface group" data-testid={`qualification-card-${index}`}>
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between">
+                      <div className={`grid h-12 w-12 place-items-center rounded-xl bg-${qual.color}-400/10 text-${qual.color}-300`}>
+                        <qual.icon size={24} />
+                      </div>
+                      <span className="font-mono text-xs text-slate-600">CERT / 0{index + 1}</span>
+                    </div>
+                    <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-sky-300" data-testid={`qualification-overline-${index}`}>{qual.year}</p>
+                    <h3 className="mt-2 text-lg font-semibold text-white" data-testid={`qualification-title-${index}`}>{qual.title}</h3>
+                    <p className="mt-1 text-sm text-slate-500" data-testid={`qualification-org-${index}`}>{qual.org}</p>
+                    <ul className="mt-5 space-y-2" data-testid={`qualification-details-${index}`}>
+                      {qual.details.map((detail, dIndex) => (
+                        <li key={dIndex} className="flex items-start gap-2 text-sm text-slate-400" data-testid={`qualification-detail-${index}-${dIndex}`}>
+                          <Check className="mt-0.5 flex-shrink-0 text-emerald-300" size={14} />
+                          {detail}
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section id="contact" className="section-shell pb-24" data-testid="contact-section">
-          <div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="relative overflow-hidden rounded-[1.75rem] border border-sky-400/20 bg-gradient-to-br from-sky-400/[0.11] via-[#121e36] to-indigo-500/[0.08] p-6 shadow-[0_0_70px_rgba(56,189,248,0.08)] sm:p-10 lg:p-14"><div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-sky-400/10 blur-[100px]" /><div className="relative grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-end"><div><p className="section-kicker" data-testid="contact-overline">06 / LET'S CONNECT</p><h2 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl" data-testid="contact-title">Have an idea worth making real?</h2><p className="mt-5 max-w-lg text-base leading-relaxed text-slate-400 sm:text-lg" data-testid="contact-copy">Tell me what you are building, organizing or improving. I would love to understand the challenge and see where I can contribute.</p><div className="mt-8 space-y-4"><button onClick={() => copyToClipboard(email, "Email")} className="flex items-center gap-3 text-left text-sm text-slate-300 transition-colors hover:text-sky-300" data-testid="contact-email-copy-button"><span className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-sky-300"><Mail size={16} /></span>{email}<Clipboard size={14} className="text-slate-600" /></button><a href={`tel:${phone.replaceAll(" ", "")}`} className="flex items-center gap-3 text-sm text-slate-300 transition-colors hover:text-sky-300" data-testid="contact-phone-link"><span className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-sky-300"><Phone size={16} /></span>{phone}</a><a href={linkedIn} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sm text-slate-300 transition-colors hover:text-sky-300" data-testid="contact-linkedin-button"><span className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-sky-300"><Linkedin size={16} /></span>Connect on LinkedIn <ExternalLink size={14} /></a></div></div><form onSubmit={handleInquiry} className="rounded-2xl border border-white/10 bg-[#090d16]/50 p-5 backdrop-blur-md sm:p-7" data-testid="contact-inquiry-form"><div className="grid gap-4 sm:grid-cols-2"><label className="text-xs font-medium uppercase tracking-[0.13em] text-slate-500" data-testid="contact-name-label">Your name<input name="name" required placeholder="Atanu's next collaborator" className="form-input mt-2" data-testid="contact-name-input" /></label><label className="text-xs font-medium uppercase tracking-[0.13em] text-slate-500" data-testid="contact-email-label">Your email<input name="senderEmail" type="email" required placeholder="you@example.com" className="form-input mt-2" data-testid="contact-sender-email-input" /></label></div><label className="mt-4 block text-xs font-medium uppercase tracking-[0.13em] text-slate-500" data-testid="contact-subject-label">Subject<input name="subject" required placeholder="Let's work together" className="form-input mt-2" data-testid="contact-subject-input" /></label><label className="mt-4 block text-xs font-medium uppercase tracking-[0.13em] text-slate-500" data-testid="contact-message-label">Message<textarea name="message" required rows={4} placeholder="What are you working on?" className="form-input mt-2 resize-none" data-testid="contact-message-input" /></label><div className="mt-5 flex flex-wrap items-center justify-between gap-4"><p className="text-xs text-slate-500" data-testid="contact-form-note">This opens your email app — no form data is stored.</p><Button type="submit" className="bg-sky-400 font-bold text-slate-950 hover:bg-sky-300" data-testid="contact-inquiry-form-submit">{formSent ? "Draft ready" : "Prepare email"} <ArrowUpRight size={15} /></Button></div></form></div></div></div>
+          <div className="mx-auto max-w-7xl px-5 lg:px-8">
+            <div className="relative overflow-hidden rounded-[1.75rem] border border-sky-400/20 bg-gradient-to-br from-sky-400/[0.11] via-[#121e36] to-indigo-500/[0.08] p-6 shadow-[0_0_70px_rgba(56,189,248,0.08)] sm:p-10 lg:p-14">
+              <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-sky-400/10 blur-[100px]" />
+              <div className="relative grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+                <div>
+                  <p className="section-kicker" data-testid="contact-overline">05 / LET'S BUILD TOGETHER</p>
+                  <h2 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl" data-testid="contact-title">Have a data or AI challenge?</h2>
+                  <p className="mt-5 max-w-lg text-base leading-relaxed text-slate-400 sm:text-lg" data-testid="contact-copy">I'm always interested in collaborating on interesting data engineering, MLOps, or AI infrastructure problems. Let's talk about what you're building.</p>
+                  <div className="mt-8 space-y-4">
+                    <button onClick={() => copyToClipboard(email, "Email")} className="flex items-center gap-3 text-left text-sm text-slate-300 transition-colors hover:text-sky-300" data-testid="contact-email-copy-button">
+                      <span className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-sky-300"><Mail size={16} /></span>{email}<Clipboard size={14} className="text-slate-600" />
+                    </button>
+                    <a href={`tel:${phone.replaceAll(" ", "")}`} className="flex items-center gap-3 text-sm text-slate-300 transition-colors hover:text-sky-300" data-testid="contact-phone-link">
+                      <span className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-sky-300"><Phone size={16} /></span>{phone}
+                    </a>
+                    <a href={linkedIn} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sm text-slate-300 transition-colors hover:text-sky-300" data-testid="contact-linkedin-button">
+                      <span className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-sky-300"><Linkedin size={16} /></span>LinkedIn
+                    </a>
+                    <a href={github} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sm text-slate-300 transition-colors hover:text-sky-300" data-testid="contact-github-button">
+                      <span className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-sky-300"><GitBranch size={16} /></span>GitHub
+                    </a>
+                  </div>
+                </div>
+                <form onSubmit={handleInquiry} className="relative w-full max-w-md" data-testid="contact-form">
+                  <div className="grid gap-4">
+                    <div>
+                      <label htmlFor="name" className="block text-xs font-medium uppercase tracking-[0.1em] text-slate-400">Name</label>
+                      <input id="name" name="name" type="text" required className="mt-2 w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:border-sky-400/50 focus:outline-none focus:ring-1 focus:ring-sky-400/50" placeholder="Your name" data-testid="contact-name-input" />
+                    </div>
+                    <div>
+                      <label htmlFor="subject" className="block text-xs font-medium uppercase tracking-[0.1em] text-slate-400">Subject</label>
+                      <input id="subject" name="subject" type="text" className="mt-2 w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:border-sky-400/50 focus:outline-none focus:ring-1 focus:ring-sky-400/50" placeholder="Project inquiry / Collaboration / Role" data-testid="contact-subject-input" />
+                    </div>
+                    <div>
+                      <label htmlFor="message" className="block text-xs font-medium uppercase tracking-[0.1em] text-slate-400">Message</label>
+                      <textarea id="message" name="message" rows={4} required className="mt-2 w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:border-sky-400/50 focus:outline-none focus:ring-1 focus:ring-sky-400/50 resize-none" placeholder="Tell me about your project, team, or opportunity..." data-testid="contact-message-textarea" />
+                    </div>
+                    <button type="submit" className="mt-2 w-full rounded-lg bg-sky-400 px-5 py-3 text-sm font-bold uppercase tracking-[0.1em] text-slate-950 transition-all hover:-translate-y-0.5 hover:bg-sky-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.3)]" data-testid="contact-submit-button">Send message <ArrowUpRight size={16} /></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </section>
       </main>
 
-      {qualificationOpen && <div className="fixed inset-0 z-[60] grid place-items-center bg-[#03050a]/80 p-5 backdrop-blur-sm" role="presentation" onMouseDown={() => setQualificationOpen(false)} data-testid="qualifications-modal-overlay"><div role="dialog" aria-modal="true" aria-labelledby="qualification-dialog-title" className="relative max-h-[90vh] w-full max-w-2xl overflow-auto rounded-2xl border border-white/10 bg-[#101a2e] p-6 shadow-2xl sm:p-9" onMouseDown={(event) => event.stopPropagation()} data-testid="qualifications-modal"><button className="absolute right-4 top-4 rounded-lg p-2 text-slate-500 hover:bg-white/10 hover:text-white" onClick={() => setQualificationOpen(false)} aria-label="Close qualifications" data-testid="qualifications-modal-close"><X size={18} /></button><p className="section-kicker">Detailed profile</p><h2 id="qualification-dialog-title" className="mt-3 text-3xl font-bold text-white" data-testid="qualifications-modal-title">A foundation built for range.</h2><p className="mt-4 leading-relaxed text-slate-400" data-testid="qualifications-modal-copy">Electrical engineering trained me to observe systems, ask precise questions and keep improving the signal. Work and event leadership taught me to apply that thinking with people and under real constraints.</p><div className="mt-8 grid gap-3 sm:grid-cols-2">{["Systems thinking", "Process discipline", "Team leadership", "Client communication", "Vendor coordination", "Learning by doing"].map((item) => <div key={item} className="flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.03] p-4 text-sm text-slate-200" data-testid={`qualification-detail-${item.toLowerCase().replaceAll(" ", "-")}`}><Check size={15} className="text-emerald-300" />{item}</div>)}</div></div></div>}
-
-      <footer className="border-t border-white/[0.08]" data-testid="site-footer"><div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 sm:flex-row sm:items-center sm:justify-between lg:px-8"><p className="font-mono text-xs text-slate-600" data-testid="footer-copyright">© 2024 Atanu Bhowmick. Built with curiosity.</p><div className="flex items-center gap-5"><a href="#top" className="text-xs uppercase tracking-[0.16em] text-slate-500 hover:text-sky-300" data-testid="footer-back-to-top">Back to top <ArrowUpRight className="ml-1 inline" size={13} /></a><a href={linkedIn} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-sky-300" data-testid="footer-linkedin-link"><Linkedin size={17} /></a></div></div></footer>
+      <footer className="border-t border-white/[0.08]" data-testid="site-footer">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+          <p className="font-mono text-xs text-slate-600" data-testid="footer-copyright">© 2024 Atanu Bhowmick. Built with data & curiosity.</p>
+          <div className="flex items-center gap-5">
+            <a href="#top" className="text-xs uppercase tracking-[0.16em] text-slate-500 hover:text-sky-300" data-testid="footer-back-to-top">Back to top <ArrowUpRight className="ml-1 inline" size={13} /></a>
+            <a href={github} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-sky-300" data-testid="footer-github-link" aria-label="GitHub"><GitBranch size={17} /></a>
+            <a href={linkedIn} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-sky-300" data-testid="footer-linkedin-link" aria-label="LinkedIn"><Linkedin size={17} /></a>
+            <a href={`mailto:${email}`} className="text-slate-500 hover:text-sky-300" data-testid="footer-email-link" aria-label="Email"><Mail size={17} /></a>
+          </div>
+        </div>
+      </footer>
       <Toaster richColors />
     </div>
   );
